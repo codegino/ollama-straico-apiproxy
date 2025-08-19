@@ -40,9 +40,9 @@ def extract_images_from_messages(msgs):
 
 @app.post("/chat/completions")
 @app.post("/v1/chat/completions")
-@app.post("/v1/lazybird/chat/completions")
-@app.post("/v1/openai/chat/completions")
-@app.post("/v1/elevenlabs/chat/completions")
+@app.post("/lazybird/v1/chat/completions")
+@app.post("/openai/v1/chat/completions")
+@app.post("/elevenlabs/v1/chat/completions")
 @observe
 async def chat_completions(request: Request):
     try:

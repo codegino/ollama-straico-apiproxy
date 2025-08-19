@@ -27,13 +27,13 @@ if LAZYBIRD_API_KEY is not None:
             <= datetime.now()
         ):
             result = await tts_models_lazybird()
-            ids = (m["id"] for m in result)
+            ids = list(m["id"] for m in result)
             name_mapping = dict(((m["displayName"], m["id"]) for m in result))
             voice_model_last_update_dt_lazybird = datetime.now()
             voice_model_result_lazybird = ids, name_mapping
         return voice_model_result_lazybird
 
-    @app.post("/v1/lazybird/audio/speech")
+    @app.post("/lazybird/v1/audio/speech")
     async def lazybird_tts(request: Request):
         try:
             post_json_data = await request.json()
@@ -64,7 +64,7 @@ from backend.straico_platform import download_file
 
 
 @app.post("/v1/audio/speech")
-@app.post("/v1/openai/audio/speech")
+@app.post("/openai/v1/audio/speech")
 async def openai_tts(request: Request):
     try:
         post_json_data = await request.json()
@@ -103,7 +103,7 @@ async def get_elevenlabs_model_mapping():
     return voice_model_result_elevenlabs
 
 
-@app.post("/v1/elevenlabs/audio/speech")
+@app.post("/elevenlabs/v1/audio/speech")
 async def elevenlabs_tts(request: Request):
     try:
         post_json_data = await request.json()
